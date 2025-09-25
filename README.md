@@ -4,8 +4,8 @@ A simple and intuitive shopping list application to help you organize your groce
 
 ## 📸 Screenshots
 
-<img src="src/assets/screenshots/image1.png" alt="Shopping List - Image 1" width="400" />
-<img src="src/assets/screenshots/image2.png" alt="Shopping List - Image 2" width="400" />
+<img src="frontend/src/assets/screenshots/image1.png" alt="Shopping List - Image 1" width="400" />
+<img src="frontend/src/assets/screenshots/image2.png" alt="Shopping List - Image 2" width="400" />
 
 
 ## 🚀 Features
