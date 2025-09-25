@@ -13,8 +13,6 @@ A simple and intuitive shopping list application to help you organize your groce
 - ✅ Add, edit, and delete shopping items
 - 🗂️ Categorize items (e.g., Dairy, Vegetables)
 - ✅ Mark items as bought
-- 📱 Mobile-friendly interface
-- 💾 Local storage or backend storage support
 
 ## 🧪 Technologies Used
 
