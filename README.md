@@ -18,7 +18,7 @@ A simple and intuitive shopping list application to help you organize your groce
 
 ## 🧪 Technologies Used
 
-- **Frontend**: React, Tailwind CSS (or HTML/CSS/JS if simple)
+- **Frontend**: React, Tailwind CSS 
 - **Backend**: Node.js, Express
 - **Database**: PostgreSQL
   
