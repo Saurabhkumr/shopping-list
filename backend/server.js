@@ -6,7 +6,6 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
 
 app.use(
   cors({
@@ -19,8 +18,11 @@ app.use(
 );
 app.use(express.json());
 
-app.use("/api/items", itemsRouter);
-
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+app.listen(5000, () => {
+  console.log("server is running 5000! ");
 });
+app.get("/", (req, res) => {
+  res.send("Backend is live!");
+});
+
+app.use("/api/items", itemsRouter);
