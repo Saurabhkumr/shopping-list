@@ -4,6 +4,7 @@ import { ShoppingItem } from "./ShoppingItem.jsx";
 import { AddItemForm } from "./AddItemForm.jsx";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import BounceLoader from "react-spinners/BounceLoader";  // ✅ loader import
 
 import { getItems, addItem, updateItem, deleteItem } from "../api";
 
@@ -77,7 +78,6 @@ export const ShoppingList = () => {
   // Delete item
   const handleDeleteItem = async (id) => {
     try {
-      console.log(id);
       const deleted = await deleteItem(id);
       setItems((prev) => prev.filter((item) => item.id !== id));
       toast.info(deleted.message);
@@ -209,65 +209,73 @@ export const ShoppingList = () => {
           />
         )}
 
-        {/* Items */}
+        {/* Items Section */}
         <div className="space-y-6">
-          {activeItems.length > 0 && (
-            <div>
-              <h2 className="text-xl font-semibold mb-4 text-white">
-                Shopping List ({activeItems.length})
-              </h2>
-              <div className="grid gap-3">
-                {activeItems.map((item) => (
-                  <ShoppingItem
-                    key={item.id}
-                    item={item}
-                    onUpdate={handleUpdateItem}
-                    onDelete={handleDeleteItem}
-                    onToggleComplete={() => handleToggleComplete(item.id)}
-                  />
-                ))}
-              </div>
+          {loading ? (
+            <div className="flex justify-center items-center py-16">
+              <BounceLoader color="#facc15" size={60} /> {/* yellow loader */}
             </div>
-          )}
+          ) : (
+            <>
+              {activeItems.length > 0 && (
+                <div>
+                  <h2 className="text-xl font-semibold mb-4 text-white">
+                    Shopping List ({activeItems.length})
+                  </h2>
+                  <div className="grid gap-3">
+                    {activeItems.map((item) => (
+                      <ShoppingItem
+                        key={item.id}
+                        item={item}
+                        onUpdate={handleUpdateItem}
+                        onDelete={handleDeleteItem}
+                        onToggleComplete={() => handleToggleComplete(item.id)}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
 
-          {completedItems.length > 0 && (
-            <div>
-              <h2 className="text-xl font-semibold mb-4 text-gray-500">
-                Completed ({completedItems.length})
-              </h2>
-              <div className="grid gap-3">
-                {completedItems.map((item) => (
-                  <ShoppingItem
-                    key={item.id}
-                    item={item}
-                    onUpdate={handleUpdateItem}
-                    onDelete={handleDeleteItem}
-                    onToggleComplete={() => handleToggleComplete(item.id)}
-                  />
-                ))}
-              </div>
-            </div>
-          )}
+              {completedItems.length > 0 && (
+                <div>
+                  <h2 className="text-xl font-semibold mb-4 text-gray-500">
+                    Completed ({completedItems.length})
+                  </h2>
+                  <div className="grid gap-3">
+                    {completedItems.map((item) => (
+                      <ShoppingItem
+                        key={item.id}
+                        item={item}
+                        onUpdate={handleUpdateItem}
+                        onDelete={handleDeleteItem}
+                        onToggleComplete={() => handleToggleComplete(item.id)}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
 
-          {!loading && filteredItems.length === 0 && (
-            <div className="bg-gray-800 border border-gray-700 rounded-xl p-12 text-center">
-              <div className="mb-6">
-                <ShoppingCart className="h-16 w-16 mx-auto text-gray-600" />
-              </div>
-              <h3 className="text-xl font-medium text-gray-300 mb-2">
-                Your shopping list is empty
-              </h3>
-              <p className="text-gray-500 mb-6">
-                Add your first item to get started!
-              </p>
-              <button
-                onClick={() => setShowAddForm(true)}
-                className="px-6 py-3 rounded-xl text-gray-900 font-semibold bg-yellow-400 hover:bg-yellow-300 transition-all duration-200"
-              >
-                <Plus className="h-5 w-5 mr-2 inline" />
-                Add Item
-              </button>
-            </div>
+              {filteredItems.length === 0 && (
+                <div className="bg-gray-800 border border-gray-700 rounded-xl p-12 text-center">
+                  <div className="mb-6">
+                    <ShoppingCart className="h-16 w-16 mx-auto text-gray-600" />
+                  </div>
+                  <h3 className="text-xl font-medium text-gray-300 mb-2">
+                    Your shopping list is empty
+                  </h3>
+                  <p className="text-gray-500 mb-6">
+                    Add your first item to get started!
+                  </p>
+                  <button
+                    onClick={() => setShowAddForm(true)}
+                    className="px-6 py-3 rounded-xl text-gray-900 font-semibold bg-yellow-400 hover:bg-yellow-300 transition-all duration-200"
+                  >
+                    <Plus className="h-5 w-5 mr-2 inline" />
+                    Add Item
+                  </button>
+                </div>
+              )}
+            </>
           )}
         </div>
       </div>
